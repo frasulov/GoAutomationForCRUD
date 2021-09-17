@@ -1,0 +1,21 @@
+package service
+
+import (
+	"%s/%s/models"
+	"%s/%s/repo"
+)
+
+type %sService struct {
+	repository repo.%sRepository
+}
+
+func GetNew%sService(%sRepository repo.%sRepository) *%sService {
+	return &%sService{
+		repository: %sRepository,
+	}
+}
+
+func (%sService * %sService) Get%s(id uint) models.%s{
+	%s := %sService.repository.Get%sById(id)
+	return %s
+}

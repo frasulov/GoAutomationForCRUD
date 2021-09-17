@@ -1,0 +1,80 @@
+server:
+  port: 8085
+
+database:
+  host: localhost
+  user: postgres
+  password: postgrespassword
+  dbname: postgres
+  sslmode: disable
+  timezone: UTC
+  port: 5432
+
+project:
+    name: auth-microservice
+    apps:
+      - app:
+          name: auth
+          models:
+            - model:
+                name: Student
+                fields:
+                  - column:
+                      name: ID
+                      type: uint
+                  - column:
+                      name: FirstName
+                      type: string
+                  - column:
+                      name: LastName
+                      type: string
+                  - column:
+                      name: Gpa
+                      type: float
+                  - column:
+                      name: Courses
+                      type: "[]models.Course"
+                  - column:
+                      name: CreateAt
+                      type: time.Time
+                  - column:
+                      name: UpdatedAt
+                      type: time.Time
+            - model:
+                name: Course
+                fields:
+                  - column:
+                      name: ID
+                      type: uint
+                  - column:
+                      name: Title
+                      type: string
+                  - column:
+                      name: Instructor
+                      type: string
+                  - column:
+                      name: Subject
+                      type: string
+          folders:
+            - folder:
+                name: models
+            - folder:
+                name: config
+            - folder:
+                name: repository
+            - folder:
+                name: controller
+            - folder:
+                name: service
+            - folder:
+                name: route
+                files:
+                  file:
+                    name: StudentRoute.go
+
+
+
+libraries:
+  - library: "gorm.io/driver/postgres"
+  - library: "gorm.io/gorm"
+  - library: "github.com/gin-gonic/gin"

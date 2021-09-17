@@ -1,0 +1,50 @@
+package repo
+
+import (
+	"%s/%s/models"
+	"gorm.io/gorm"
+)
+
+type %sRepository struct {
+	connection		*gorm.DB
+}
+
+func GetNew%sRepository(conn *gorm.DB) *%sRepository{
+	return &%sRepository{
+		connection: conn,
+	}
+}
+
+func (%sRepository * %sRepository) Init() {
+	%sRepository.connection.AutoMigrate(&models.%s{})
+}
+
+func (%sRepository * %sRepository) Get%sById(id uint) models.%s {
+	var %s models.%s
+	%sRepository.connection.First(&%s, id)
+	return %s
+}
+
+func (%sRepository * %sRepository) Save(%s *models.%s) error {
+    if err := %sRepository.connection.Create(&%s).Error; err != nil {
+        return err
+    }
+    return nil
+}
+
+func (%sRepository * %sRepository) GetAll%ss() ([]models.%s, error) {
+    var %ss []models.%s
+    if err := %sRepository.connection.Find(&%ss).Error; err!=nil{
+        return nil, err
+    }
+    return %ss, nil
+}
+
+func (%sRepository * %sRepository) Delete%sById(id uint) error {
+	if err := %sRepository.connection.Delete(&models.%s{}, id).Error; err!=nil{
+	    return err
+	}
+	return nil
+}
+
+

@@ -1,0 +1,38 @@
+package controller
+
+import (
+	"%s/%s/config"
+	"%s/%s/models"
+	"%s/%s/repository"
+	"%s/%s/service"
+	"github.com/gin-gonic/gin"
+)
+
+
+var %sService *service.%sService
+
+func init() {
+	db := config.NewDatabase("%s",
+		"%s",
+		"%s",
+		"%s",
+		"%s",
+		"%s",
+		%s)
+	var conn, err = db.Connect()
+	if err != nil{
+		return
+	}
+	%sRepository := repo.GetNew%sRepository(conn)
+	%sRepository.Init()
+	%sService = service.GetNew%sService(*%sRepository)
+}
+
+
+func Get%s(c *gin.Context) {
+	%sService.Get%s(1)
+}
+
+func %sController(c *gin.Context) {
+
+}
